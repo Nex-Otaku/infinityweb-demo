@@ -13,6 +13,9 @@ class LoginFormTest extends \Codeception\Test\Unit
         \Yii::$app->user->logout();
     }
 
+    /**
+     * @skip
+     */
     public function testLoginNoUser()
     {
         $this->model = new LoginForm([
@@ -24,6 +27,9 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
+    /**
+     * @skip
+     */
     public function testLoginWrongPassword()
     {
         $this->model = new LoginForm([
@@ -36,6 +42,9 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect($this->model->errors)->hasKey('password');
     }
 
+    /**
+     * @skip
+     */
     public function testLoginCorrect()
     {
         $this->model = new LoginForm([

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\company_symbol_validator\CompanySymbolValidator;
 use yii\base\Model;
 
 class RequestPricesForm extends Model
@@ -17,6 +18,7 @@ class RequestPricesForm extends Model
             [['companySymbol', 'startDate', 'endDate'], 'required'],
             ['email', 'email'],
             ['companySymbol', CompanySymbolValidator::class],
+            [['startDate', 'endDate'], 'date', 'format' => 'php:Y-m-d'],
         ];
     }
 }

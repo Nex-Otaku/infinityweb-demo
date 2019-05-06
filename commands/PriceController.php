@@ -2,24 +2,27 @@
 
 namespace app\commands;
 
-use app\models\RequestPricesForm;
-use Yii;
+use app\components\prices_api\PricesApi;
 use yii\console\Controller;
 
 class PriceController extends Controller
 {
+    private $pricesApi;
+
+    public function __construct(
+        $id,
+        $module,
+        PricesApi $pricesApi,
+        $config = []
+    )
+    {
+        $this->pricesApi = $pricesApi;
+        parent::__construct($id, $module, $config);
+    }
 
     public function actionMakeRequest()
     {
-        $model = new RequestPricesForm();
-        $prices = [];
-        if ($model->load(Yii::$app->request->post())) {
-            $prices = $this->pricesApi->getPrices($model->companySymbol, $model->startDate, $model->endDate);
-        }
-
-        return $this->render('index', [
-            'model' => $model,
-            'prices' => $prices,
-        ]);
+        $prices = $this->pricesApi->getPrices('WBAI', '1999-01-01', '2019-01-01');
+        var_dump($prices);
     }
 }

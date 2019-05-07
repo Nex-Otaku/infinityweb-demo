@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\components\prices_api\PricesApi;
 use app\models\RequestPricesForm;
-use components\prices_converter\PricesConverter;
+use app\components\prices_converter\PricesConverter;
 use Yii;
 use yii\base\Module;
 use yii\data\ArrayDataProvider;
@@ -63,6 +63,7 @@ class SiteController extends Controller
             'model' => $model,
             'hasPrices' => $hasPrices,
             'pricesProvider' => $pricesProvider,
+            'prices' => $prices,
         ]);
     }
 }

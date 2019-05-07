@@ -1,11 +1,44 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e77ab50cfa618b3db5c0b9fc696c005",
+    "content-hash": "f15f02591e50d83a715abca74ae2d34b",
     "packages": [
+        {
+            "name": "bower-asset/amcharts",
+            "version": "v3.15.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arturgspb/bower-amcharts.git",
+                "reference": "47b9e0976015243db5254eb64f449743b1bbdca0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arturgspb/bower-amcharts/zipball/47b9e0976015243db5254eb64f449743b1bbdca0",
+                "reference": "47b9e0976015243db5254eb64f449743b1bbdca0",
+                "shasum": null
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/amcharts-stock",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:denisvolokh/bower-amcharts-stock.git",
+                "reference": "22a2d2032328dc4d29282384a14f4994c6f3f8f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/denisvolokh/bower-amcharts-stock/zipball/22a2d2032328dc4d29282384a14f4994c6f3f8f1",
+                "reference": "22a2d2032328dc4d29282384a14f4994c6f3f8f1",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "time": "2015-01-28T07:40:20+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
@@ -17,7 +50,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/twbs/bootstrap/zipball/68b0d231a13201eb14acd3dc84e51543d16e5f7e",
-                "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
+                "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e",
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.9.1,<4.0"
@@ -38,7 +72,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5e670ad62f50c738388d4dcec78d2888505ad77b",
-                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
+                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b",
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.7"
@@ -59,7 +94,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/9e8ec3d10fad04748176144f108d7355662ae75e",
-                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e"
+                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e",
+                "shasum": null
             },
             "type": "bower-asset",
             "license": [
@@ -77,7 +113,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+                "shasum": null
             },
             "type": "bower-asset"
         },
@@ -92,7 +129,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/aef7b953107264f00234902a3880eb50dafc48be",
-                "reference": "aef7b953107264f00234902a3880eb50dafc48be"
+                "reference": "aef7b953107264f00234902a3880eb50dafc48be",
+                "shasum": null
             },
             "require": {
                 "bower-asset/jquery": ">=1.8"
@@ -319,6 +357,48 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "speixoto/yii2-amcharts",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/speixoto/yii2-amcharts.git",
+                "reference": "2a0c95360710e9a4317fd735fc3392772b75b8af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/speixoto/yii2-amcharts/zipball/2a0c95360710e9a4317fd735fc3392772b75b8af",
+                "reference": "2a0c95360710e9a4317fd735fc3392772b75b8af",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/amcharts": "*",
+                "bower-asset/amcharts-stock": "dev-master",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "speixoto\\amcharts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sérgio Peixoto",
+                    "email": "matematico2002@hotmail.com"
+                }
+            ],
+            "description": "AmCharts Widget for Yii 2",
+            "keywords": [
+                "amcharts",
+                "yii"
+            ],
+            "time": "2016-08-23T13:52:28+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3599,12 +3679,13 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.0"
+        "php": ">=7.2.0",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

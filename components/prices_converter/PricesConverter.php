@@ -1,6 +1,6 @@
 <?php
 
-namespace components\prices_converter;
+namespace app\components\prices_converter;
 
 use yii\helpers\ArrayHelper;
 

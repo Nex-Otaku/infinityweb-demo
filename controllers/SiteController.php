@@ -4,24 +4,27 @@ namespace app\controllers;
 
 use app\components\prices_api\PricesApi;
 use app\models\RequestPricesForm;
+use components\prices_converter\PricesConverter;
 use Yii;
 use yii\base\Module;
 use yii\data\ArrayDataProvider;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class SiteController extends Controller
 {
     private $pricesApi;
+    private $pricesConverter;
 
     public function __construct(
         string $id,
         Module $module,
         PricesApi $pricesApi,
+        PricesConverter $pricesConverter,
         array $config = []
     )
     {
         $this->pricesApi = $pricesApi;
+        $this->pricesConverter = $pricesConverter;
         parent::__construct($id, $module, $config);
     }
 
@@ -46,7 +49,7 @@ class SiteController extends Controller
             $pricesApiResponse = $this->pricesApi->getPrices($model->companySymbol, $model->startDate, $model->endDate);
             $hasPrices = $pricesApiResponse->isSuccess;
             if ($hasPrices) {
-                $prices = $this->convertPrices($pricesApiResponse->data);
+                $prices = $this->pricesConverter->convertFromApi($pricesApiResponse->data);
             }
         }
 
@@ -61,32 +64,5 @@ class SiteController extends Controller
             'hasPrices' => $hasPrices,
             'pricesProvider' => $pricesProvider,
         ]);
-    }
-
-    private function convertPrices(?array $data): array
-    {
-        if ($data === null) {
-            return [];
-        }
-        $rows = ArrayHelper::getValue($data, 'dataset.data', []);
-        if (\count($rows) === 0) {
-            return [];
-        }
-
-        $prices = [];
-        $columns = ArrayHelper::getValue($data, 'dataset.column_names', []);
-        $allowedColumns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'];
-        foreach ($rows as $row) {
-            $dayPrice = [];
-            foreach ($row as $columnIndex => $value) {
-                $columnName = $columns[$columnIndex];
-                if (!in_array($columnName, $allowedColumns)) {
-                    continue;
-                }
-                $dayPrice[$columnName] = $value;
-            }
-            $prices []= $dayPrice;
-        }
-        return $prices;
     }
 }

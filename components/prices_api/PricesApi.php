@@ -24,7 +24,7 @@ class PricesApi
                 ->setUrl($url)
                 ->setData([
                     'order' => 'asc',
-                    'star_date' => $startDate,
+                    'start_date' => $startDate,
                     'end_date' => $endDate,
                     'api_key' => $apiKey,
                 ])

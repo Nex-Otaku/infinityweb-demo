@@ -3,9 +3,10 @@
 /* @var $this yii\web\View */
 /* @var $model RequestPricesForm */
 /* @var $hasPrices bool */
-/* @var $prices array */
+/* @var $pricesProvider ArrayDataProvider */
 
 use app\models\RequestPricesForm;
+use yii\data\ArrayDataProvider;
 
 $this->title = 'Demo InfinityWeb';
 ?>
@@ -25,11 +26,11 @@ $this->title = 'Demo InfinityWeb';
         ]) ?>
         <?php if ($hasPrices): ?>
             <?= $this->render('index/table', [
-                'prices' => $prices,
+                'pricesProvider' => $pricesProvider,
             ]) ?>
 
             <?= $this->render('index/chart', [
-                'prices' => $prices,
+                'pricesProvider' => $pricesProvider,
             ]) ?>
         <?php else: ?>
             <p>Не удалось получить данные.</p>

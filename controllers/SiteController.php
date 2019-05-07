@@ -2,16 +2,27 @@
 
 namespace app\controllers;
 
+use app\components\prices_api\PricesApi;
+use app\models\RequestPricesForm;
 use Yii;
-use yii\filters\AccessControl;
+use yii\base\Module;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    private $pricesApi;
+
+    public function __construct(
+        string $id,
+        Module $module,
+        PricesApi $pricesApi,
+        array $config = []
+    )
+    {
+        $this->pricesApi = $pricesApi;
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -28,12 +39,18 @@ class SiteController extends Controller
     {
         $model = new RequestPricesForm();
         $prices = [];
+        $hasPrices = false;
         if ($model->load(Yii::$app->request->post())) {
-            $prices = $this->pricesApi->getPrices($model->companySymbol, $model->startDate, $model->endDate);
+            $pricesApiResponse = $this->pricesApi->getPrices($model->companySymbol, $model->startDate, $model->endDate);
+            $hasPrices = $pricesApiResponse->isSuccess;
+            if ($hasPrices) {
+                $prices = $pricesApiResponse->data;
+            }
         }
 
         return $this->render('index', [
             'model' => $model,
+            'hasPrices' => $hasPrices,
             'prices' => $prices,
         ]);
     }

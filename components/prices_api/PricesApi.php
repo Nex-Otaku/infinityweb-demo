@@ -15,8 +15,6 @@ class PricesApi
     {
         $client = new Client();
         $url = $this->getUrl($companySymbol);
-//        die($url);
-//        die($companySymbol);
         $apiKey = $this->getApiKey();
 
         /* @var $response \yii\httpclient\Response */

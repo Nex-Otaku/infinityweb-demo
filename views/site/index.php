@@ -1,6 +1,11 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $model RequestPricesForm */
+/* @var $hasPrices bool */
+/* @var $prices array */
+
+use app\models\RequestPricesForm;
 
 $this->title = 'Demo InfinityWeb';
 ?>
@@ -15,6 +20,21 @@ $this->title = 'Demo InfinityWeb';
     </div>
 
     <div class="body-content">
+        <?= $this->render('index/form', [
+            'model' => $model,
+        ]) ?>
+        <?php if ($hasPrices): ?>
+            <?= $this->render('index/table', [
+                'prices' => $prices,
+            ]) ?>
+
+            <?= $this->render('index/chart', [
+                'prices' => $prices,
+            ]) ?>
+        <?php else: ?>
+            <p>Не удалось получить данные.</p>
+        <?php endif; ?>
+
 
         <div class="row">
             <div class="col-lg-4">

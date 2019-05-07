@@ -9,4 +9,6 @@ $params = [
     'quandl.apiToken' => 'PUT-YOUR-TOKEN-HERE',
 ];
 
+$params = array_merge($params, $paramsLocal);
+
 return $params;

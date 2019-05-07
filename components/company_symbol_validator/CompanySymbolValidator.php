@@ -17,7 +17,7 @@ class CompanySymbolValidator extends Validator
         $this->companySymbolStorage = $companySymbolStorage;
     }
 
-    public function validateAttribute($model, $attribute)
+    public function validateAttribute($model, $attribute): void
     {
         $companySymbol = $model->$attribute;
 
@@ -26,7 +26,7 @@ class CompanySymbolValidator extends Validator
         }
     }
 
-    private function exists(string $companySymbol)
+    private function exists(string $companySymbol): bool
     {
         $symbols = $this->companySymbolStorage->getAll();
         return in_array($companySymbol, $symbols);

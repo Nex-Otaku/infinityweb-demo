@@ -8,11 +8,12 @@ use Yii;
 
 class CompanySymbolStorage
 {
-    const FILE_MODE_READ = 'r';
+    private const FILE_MODE_READ = 'r';
 
     public function getAll(): array
     {
-        $symbols = $this->readSymbolsFromCsv('companylist.csv');
+        // Взято здесь: https://www.quandl.com/databases/WIKIP/documentation?anchor=companies
+        $symbols = $this->readSymbolsFromCsv('wiki-metadata.csv');
         return $symbols;
     }
 

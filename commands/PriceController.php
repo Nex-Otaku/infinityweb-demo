@@ -20,9 +20,15 @@ class PriceController extends Controller
         parent::__construct($id, $module, $config);
     }
 
-    public function actionMakeRequest()
+    public function actionMakeRequest(): void
     {
-        $prices = $this->pricesApi->getPrices('WBAI', '1999-01-01', '2019-01-01');
-        var_dump($prices);
+        $pricesResponse = $this->pricesApi->getPrices('ATML', '2010-01-01', '2011-01-01');
+        $isSuccess = $pricesResponse->isSuccess ? 'true' : 'false';
+        $errorMessage = $pricesResponse->errorMessage;
+        $prices = print_r($pricesResponse->data, true);
+
+        echo "Is success: {$isSuccess}\n"
+            . "Error: {$errorMessage}\n"
+            . "Prices: $prices\n";
     }
 }

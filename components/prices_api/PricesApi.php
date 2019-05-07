@@ -2,7 +2,9 @@
 
 namespace app\components\prices_api;
 
+use Yii;
 use yii\httpclient\Client;
+use yii\httpclient\Response;
 
 class PricesApi
 {
@@ -13,10 +15,11 @@ class PricesApi
     {
         $client = new Client();
         $url = $this->getUrl($companySymbol);
+//        die($url);
+//        die($companySymbol);
         $apiKey = $this->getApiKey();
 
         /* @var $response \yii\httpclient\Response */
-        $exception = false;
         try {
             $response = $client->createRequest()
                 ->setMethod('GET')
@@ -29,39 +32,59 @@ class PricesApi
                 ])
                 ->send();
         } catch (\Exception $e) {
-            $exception = true;
+            return $this->buildFailResponse($e->getMessage());
         }
-        if ($exception || !$response->isOk || !is_array($response->data)) {
-            return $this->buildFailResponse();
+        if (!$response->isOk) {
+            $errorMessage = $this->extractHttpError($response);
+            return $this->buildFailResponse($errorMessage);
+        }
+        if (!is_array($response->data)) {
+            return $this->buildFailResponse('Некорректный формат ответа API');
         }
         return $this->buildSuccessResponse($response->data);
     }
 
-    private function getUrl(string $companySymbol)
+    private function getUrl(string $companySymbol): string
     {
         return self::API_BASE_URL
             . $companySymbol
             . self::FORMAT_SUFFIX;
     }
 
-    private function getApiKey()
+    private function getApiKey(): string
     {
         return Yii::$app->params['quandl.apiToken'];
     }
 
-    private function buildFailResponse()
+    private function buildFailResponse(string $errorMessage): ApiResponse
     {
         return new ApiResponse(
             false,
+            $errorMessage,
             null
         );
     }
 
-    private function buildSuccessResponse($data)
+    private function buildSuccessResponse($data): ApiResponse
     {
         return new ApiResponse(
             true,
+            '',
             $data
         );
+    }
+
+    private function extractHttpError(Response $response): string
+    {
+        try {
+            $statusCode = $response->getStatusCode();
+        } catch (\Exception $e) {
+            $statusCode = '!!! NO STATUS CODE AVAILABLE !!!';
+        }
+        $headers = print_r($response->getHeaders()->toArray(), true);
+        return "Не удалось выполнить запрос.\n"
+                . "Status Code: {$statusCode}.\n"
+                . "Headers: {$headers}\n"
+                . "Content: {$response->getContent()}";
     }
 }
